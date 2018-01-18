@@ -1,0 +1,182 @@
+﻿@using EP.CrudModalDDD.UI.Mvc.Helpers
+@model IEnumerable<EP.CrudModalDDD.Application.ViewModels.EmpresaViewModel>
+
+@{
+	ViewBag.Title = "Lista de Empresas";
+}
+<div>
+	<h2>Gestão de Empresas</h2>
+</div>
+<hr />
+
+<div class="row">
+	<div class="col-md-4">
+		@using (Html.BeginForm("Index", "Empresa", FormMethod.Get))
+		{
+			<div id="custom-search-input">
+				<div class="input-group col-md-12">
+					@Html.TextBox("buscar", null, new { @class = "form-control input", @placeholder = "Pesquisar por nome" })
+					<span class="input-group-btn">
+						<button class="btn btn-info btn" type="submit">
+							<small><i class="glyphicon glyphicon-search"></i></small>
+						</button>
+					</span>
+				</div>
+			</div>
+		}
+	</div>
+	<div class="col-md-8">
+		<div>
+			<div class="pull-right">
+				<a href="@Url.Action("Create", "Empresa")" class="btn btn-primary">
+					<span title="Detalhes" class="glyphicon glyphicon-plus-sign"></span> Novo Empresa
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+
+<div class="panel panel-default">
+	<table class="table table-striped">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Nome)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Responsavel)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NomeExibicao)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Site)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Telefone1)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Telefone2)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Logradouro)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Numero)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Complemento)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.BairroID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CEP)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Email1)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Email2)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Descricao)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nome)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Responsavel)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NomeExibicao)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Site)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Telefone1)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Telefone2)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Logradouro)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Numero)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Complemento)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.BairroID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CEP)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Email1)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Email2)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Descricao)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.EmpresaId }) |
+					@Html.ActionLink("Details", "Details", new { id = item.EmpresaId }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.EmpresaId })
+				</td>
+			</tr>
+		}
+
+	</table>
+</div>
+
+<div class="page-nation">
+	<ul class="pagination pagination-large">
+		<li>
+			@{
+				if (ViewBag.PageNumber > 1)
+				{
+					<a href="@Url.Action("Index", "Empresa", new { buscar = ViewBag.SearchData, pageNumber = ViewBag.PageNumber - 1 })">«</a>
+				}
+				else
+				{
+					<span>«</span>
+				}
+			}
+		</li>
+
+		@{
+			var atualPageNumber = ViewBag.PageNumber;
+			for (var i = 1; i <= ViewBag.TotalCount; i++)
+			{
+				<li @(atualPageNumber == i ? "class=active" : "")>
+					<a href="@Url.Action("Index", "Empresa", new {buscar = ViewBag.SearchData, pageNumber = i})">@i</a>
+				</li>
+			}
+		}
+
+		<li>
+
+			@if (ViewBag.PageNumber < ViewBag.TotalCount)
+			{
+				<a href="@Url.Action("Index", "Empresa", new { buscar = ViewBag.SearchData, pageNumber = ViewBag.PageNumber + 1 })">»</a>
+			}
+			else
+			{
+				<span>»</span>
+			}
+
+		</li>
+	</ul>
+</div>
