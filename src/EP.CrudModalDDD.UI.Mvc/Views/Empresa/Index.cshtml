@@ -1,4 +1,4 @@
-﻿@using EP.CrudModalDDD.UI.Mvc.Helpers
+@using EP.CrudModalDDD.UI.Mvc.Helpers
 @model IEnumerable<EP.CrudModalDDD.Application.ViewModels.EmpresaViewModel>
 
 @{
@@ -9,32 +9,63 @@
 </div>
 <hr />
 
-<div class="row">
-	<div class="col-md-4">
+<div class="row section-content" style="margin-right:auto; margin-left: auto; height: 250px; background-color: rgba(86, 91, 180, 0.66)">
+	<div class="col-md-12" style="text-align:center; padding-top: 5%;">
+		<h1>Encontre uma Desentupidora em BH mais próxima de você!</h1>
 		@using (Html.BeginForm("Index", "Empresa", FormMethod.Get))
-		{
-			<div id="custom-search-input">
-				<div class="input-group col-md-12">
-					@Html.TextBox("buscar", null, new { @class = "form-control input", @placeholder = "Pesquisar por nome" })
-					<span class="input-group-btn">
-						<button class="btn btn-info btn" type="submit">
-							<small><i class="glyphicon glyphicon-search"></i></small>
-						</button>
-					</span>
+	{
+		<div id="custom-search-input col-md-12" style="padding-left: 10%; padding-right: 10%;">
+				<div class="col-md-10">
+					@Html.TextBox("buscar", null, new { @class = "form-control input", @placeholder = "Pesquisar bairro" })
 				</div>
-			</div>
-		}
-	</div>
-	<div class="col-md-8">
-		<div>
-			<div class="pull-right">
-				<a href="@Url.Action("Create", "Empresa")" class="btn btn-primary">
-					<span title="Detalhes" class="glyphicon glyphicon-plus-sign"></span> Novo Empresa
-				</a>
-			</div>
+				<div class="col-md-2">
+					<button class="btn btn-info btn" type="submit">
+						Buscar<small><i class="glyphicon glyphicon-search"></i></small>
+					</button>
+				</div>
 		</div>
+}
 	</div>
 </div>
+<div>
+	<div class="pull-right">
+		<a href="@Url.Action("Create", "Empresa")" class="btn btn-primary">
+			<span title="Detalhes" class="glyphicon glyphicon-plus-sign"></span> Novo Empresa
+		</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		<h2>Regiões</h2>
+	</div>
+	<div class="col-md-10">
+		@foreach (var item in Model)
+		{
+		<div class="row">
+			<div class="col-md-12 border-box">
+				<div class="col-md-6">
+					<p class="anuncio-list">@Html.DisplayNameFor(model => model.BairroID) - Bairro</p>
+					<h1 class="titulo-anuncio">@Html.DisplayFor(modelItem => item.Nome)</h1>
+					<p class="anuncio-list">@Html.DisplayFor(modelItem => item.Descricao)</p>
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-4 border-box-rigth">
+					@Html.HiddenFor(modelItem => item.EmpresaId)
+					<input type="hidden" id="@item.EmpresaId" />
+
+					<h1 class="titulo-anuncio-tel">						
+							@Html.DisplayFor(modelItem => item.Telefone1).ToString().Substring(0, 7)...
+						<a href="@Url.Action("Create", "Empresa")" class="btn btn-primary">
+							Ver telefone
+						</a>
+					</h1>
+				</div>
+			</div>
+		</div>
+		}
+		
+	</div>
+	</div>
 <br />
 
 <div class="panel panel-default">
