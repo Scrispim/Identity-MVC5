@@ -325,3 +325,40 @@ table.dataTable thead .sorting:after {
  .bottom_ul li a { color:#FFF;  font-size:12px;}
 
  /* FIM FOOTER */
+
+
+.body-content .section-content {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.anuncio-list {
+	line-height: normal;
+	font-size: 13px;
+	color: #333;
+	font-weight: 300;
+	padding: 10px 0 0;
+}
+
+.titulo-anuncio {
+	color: #989898;
+	margin: 0;
+	font-size: 25px;
+	font-weight: 700;
+}
+
+.border-box {
+	border: 1px solid #ddd;
+	padding: 0;
+	min-height: 105px;
+	margin: 10px 0;
+}
+
+.border-box-left {
+	border-left: 1px solid #ddd;
+}
+
+h1.titulo-anuncio-tel {
+	padding: 12px 0 0;
+}
+
